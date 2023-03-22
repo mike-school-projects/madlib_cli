@@ -12,7 +12,6 @@ None
 
 None
 
-
 ## How to use your library (where applicable)
 
 Not applicable
@@ -23,4 +22,5 @@ To run test: pytest
 
 No test of note.  Just used the class repo supplied test file
 
-All tests passed
+All tests passed.  Updated story writes to "story.txt"
+

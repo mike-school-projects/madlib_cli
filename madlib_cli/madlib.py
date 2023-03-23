@@ -43,7 +43,7 @@ def parse_template(template):
     parts = []
     stripped = ""
 
-    for x in range(count):
+    for bracket in range(count):
         # Find index of 1st { and }
         start = temp_template.index("{")
         end = temp_template.index("}")
@@ -51,8 +51,10 @@ def parse_template(template):
         stripped = stripped + temp_template[0:start+1] + "}"
         parts.append(temp_template[(start+1):end])
 
+        # delete words up to first }
         temp_template = temp_template[(end+1):]
 
+    # add in last part of template after last }
     stripped = stripped + temp_template
 
     parts = tuple(parts)
@@ -61,22 +63,23 @@ def parse_template(template):
 
 def user_input(prompt):
     # Given a tuple with a list of prompts, return a list with user generated words
-    user_input = []
+    inputs = []
 
-    for x in prompt:
-        user_input.append(input(f"{x}: "))
+    for word_prompt in prompt:
+        inputs.append(input(f"{word_prompt}: "))
 
-    return user_input
+    return inputs
 
 def merge(stripped, words):
     new_story = stripped
 
-    for x in words:
+    for word in words:
         index = new_story.index("{")
 
-        # remove {}
-        new_story = new_story[0:index] + x + new_story[index+2:]
+        # remove {}, add in word
+        new_story = new_story[0:index] + word + new_story[index+2:]
 
+    # Make output format prettier
     print("")
     print(new_story)
     print("")
